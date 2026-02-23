@@ -1,0 +1,28 @@
+name: Daily News Briefing
+
+on:
+  schedule:
+    # 한국 시간(KST) 오전 7시는 세계 표준시(UTC)로 전날 밤 10시입니다.
+    - cron: '0 22 * * *'
+  workflow_dispatch: # 이 문구가 있으면 아버님이 원할 때 수동으로도 실행 가능합니다!
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 코드 가져오기
+        uses: actions/checkout@v3
+
+      - name: 파이썬 설치
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: 필요한 라이브러리 설치
+        run: |
+          pip install requests beautifulsoup4 google-generativeai
+
+      - name: 뉴스 요약 일꾼 실행
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python news_bot.py
