@@ -1,0 +1,5 @@
+pip install lxml
+beautifulsoup4
+requests
+lxml
+google-generativeai
