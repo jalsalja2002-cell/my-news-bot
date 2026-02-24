@@ -27,8 +27,7 @@ def main():
     
     # 모델 호출 방식 변경
     response = client.models.generate_content(
-        # model="gemini-2.0-flash",
-        model="gemini-1.5-flash",
+        model="gemini-2.0-flash",
         contents=prompt
     )
     
